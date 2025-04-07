@@ -125,7 +125,7 @@ const TimeTablePage = () => {
 
     const handleTimetableDisplay = () => {
         if (semester && branch && section) {
-            const imagePath = `/timetables/${branch}/${semester}/${section}.jpg`;
+            const imagePath = `/timetables/${branch}/${semester}/${section}.png`;
             setTimetableImage(imagePath);
         }
     };

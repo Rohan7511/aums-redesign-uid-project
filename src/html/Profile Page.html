@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #f4f6fb;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+        .profile-section {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            cursor: pointer;
+            object-fit: cover;
+        }
+        .profile-info {
+            text-align: left;
+            width: 100%;
+        }
+        .profile-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: bold;
+            width: 80px;
+        }
+        .form-group input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .save-btn {
+            background-color: #6a40c3;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .save-btn:hover {
+            background-color: #5a2faa;
+        }
+        .details-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 700px;
+        }
+        .grades-card, .projects-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        .grades-card {
+            height: 180px;
+        }
+        .projects-card {
+            height: 250px;
+        }
+        .projects-card button {
+            background-color: #6a40c3;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .projects-card ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .projects-card li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+        }
+        .projects-card button:hover {
+            background-color: #5a2faa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-section">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <input type="file" id="profilePicInput" style="display: none;" accept="image/*" onchange="updateProfilePic(event)">
+                    <img id="profilePic" src="default-profile.jpg" alt="Profile Picture" class="profile-img" onclick="document.getElementById('profilePicInput').click()">
+                </div>
+                <h2>My Profile</h2>
+                <div class="profile-info">
+                    <div class="profile-details">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" value="User Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" value="user@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone:</label>
+                            <input type="text" id="phone" value="+91 9876543210">
+                        </div>
+                        <div class="form-group">
+                            <label for="degree">Degree:</label>
+                            <input type="text" id="degree" value="B.Tech">
+                        </div>
+                    </div>
+                    <p><strong>Last Login:</strong> <span>March 21, 2025</span></p>
+                    <button class="save-btn" onclick="saveProfile()">Save</button>
+                </div>
+            </div>
+        </div>
+        <div class="details-section">
+            <div class="grades-card">
+                <h3>Grades</h3>
+                <p>Current CGPA: <span>8.5</span></p>
+                <p>Current SGPA: <span>8.7</span></p>
+                <label for="semester">View SGPA:</label>
+                <select id="semester">
+                    <option>Semester 1</option>
+                    <option>Semester 2</option>
+                </select>
+                <br><br>
+                <button class="calculate-btn">Calculate CGPA</button>
+            </div>
+            <div class="projects-card">
+                <h3>Projects</h3>
+                <ul id="projectList">
+                    <li>Project A <button onclick="removeProject(this)">Remove</button></li>
+                    <li>Project B <button onclick="removeProject(this)">Remove</button></li>
+                </ul>
+                <input type="text" id="newProject" placeholder="Enter project name">
+                <button class="add-btn" onclick="addProject()">Add Project</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function updateProfilePic(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profilePic').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeProject(button) {
+            let listItem = button.parentElement;
+            listItem.remove();
+        }
+
+        function addProject() {
+            const projectInput = document.getElementById('newProject');
+            const projectName = projectInput.value.trim();
+            const projectList = document.getElementById('projectList');
+
+            if (projectName === '') {
+                alert('Please enter a project name before adding.');
+                return;
+            }
+
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `${projectName} <button onclick="removeProject(this)">Remove</button>`;
+            projectList.appendChild(listItem);
+
+            projectInput.value = ''; // Clear input after adding
+        }
+    </script>
+</body>
+</html>

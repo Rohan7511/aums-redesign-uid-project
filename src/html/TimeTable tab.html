@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F5F5F5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .dashboard {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+        }
+        main {
+            flex: 3;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            font-size: 22px;
+            color: #1E2A78;
+        }
+        .search-bar {
+            width: 280px;
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid #D3D3D3;
+            padding-left: 10px;
+        }
+        .course-selection {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .course-selection label {
+            font-weight: bold;
+            color: #1E2A78;
+            margin-bottom: 5px;
+        }
+        .course-selection select {
+            width: 200px;
+            height: 40px;
+            border-radius: 6px;
+            border: 1px solid #D3D3D3;
+            background: white;
+            color: #1E2A78;
+        }
+        .content-box {
+            width: 100%;
+            height: 350px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #D3D3D3;
+            margin-top: 1%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .content-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <main>
+            <header>
+                <h1>Hi Osama, <br> Welcome to your courses!</h1>
+                <input type="text" placeholder="Search..." class="search-bar">
+            </header>
+            <section class="course-selection">
+                <div class="column">
+                    <div>
+                        <label>Choose the Semester</label>
+                        <select id="semester">
+                            <option>Select</option>
+                            <option>Semester 1</option>
+                            <option>Semester 2</option>
+                            <option>Semester 3</option>
+                            <option>Semester 4</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label>Choose the Course</label>
+                    <select id="course">
+                        <option>Select</option>
+                        <option>23MAT116</option>
+                        <option>23MAT117</option>
+                        <option>23CSE111</option>
+                        <option>23PHY115</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Choose your Class</label>
+                    <select id="classSelect" onchange="displayImage()">
+                        <option>Select</option>
+                        <option value="cse_a">CSE A</option>
+                        <option value="cse_b">CSE B</option>
+                        <option value="cse_c">CSE C</option>
+                        <option value="cse_d">CSE D</option>
+                    </select>
+                </div>
+            </section>
+            
+            <section class="content-box" id="contentBox">
+                <p>Select a class to view the image.</p>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function displayImage() {
+            let classSelect = document.getElementById("classSelect").value;
+            let contentBox = document.getElementById("contentBox");
+            
+            contentBox.innerHTML = ""; // Clear previous content
+            
+            if (classSelect === "cse_a") {
+                let img = document.createElement("img");
+                img.src = "file:///Users/kesh/Downloads/WhatsApp%20Image%202025-03-29%20at%2018.46.03.jpeg";
+                img.alt = "Class Image";
+                contentBox.appendChild(img);
+            } else {
+                let message = document.createElement("p");
+                message.innerText = "No image available for the selected class.";
+                contentBox.appendChild(message);
+            }
+        }
+    </script>
+</body>
+</html>

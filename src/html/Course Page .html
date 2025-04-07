@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F5F5F5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .dashboard {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+        }
+        main {
+            flex: 3;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            font-size: 22px;
+            color: #1E2A78;
+        }
+        .search-bar {
+            width: 280px;
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid #D3D3D3;
+            padding-left: 10px;
+        }
+        .course-selection {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .course-selection div {
+            display: flex;
+            flex-direction: column;
+        }
+        .course-selection label {
+            font-weight: bold;
+            color: #1E2A78;
+            margin-bottom: 5px;
+        }
+        .course-selection select {
+            width: 200px;
+            height: 40px;
+            border-radius: 6px;
+            border: 1px solid #D3D3D3;
+            background: white;
+            color: #1E2A78;
+        }
+        .content-box {
+            width: 100%;
+            height: 350px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #D3D3D3;
+        }
+        .calendar {
+            flex: 1;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-left: 20px;
+        }
+        .calendar h3 {
+            text-align: center;
+            color: #1E2A78;
+        }
+        .date-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .events li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px;
+            border-bottom: 1px solid #D3D3D3;
+        }
+        .event.lab { color: #28A745; }
+        .event.quiz { color: #DC3545; }
+        .event.assignment { color: #FFB400; }
+        .event.test { color: #007BFF; }
+        .event.presentation { color: #6F42C1; }
+        .event.end { color: black; font-weight: bold; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F5F5F5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .dashboard {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+        }
+        .calendar {
+            flex: 1;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-left: 20px;
+            text-align: center;
+        }
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            color: #1E2A78;
+            font-weight: bold;
+        }
+        .date-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            margin-top: 10px;
+        }
+        .date-grid div {
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .date-grid .today {
+            background-color: #1E2A78;
+            color: white;
+        }
+        .date-grid .selected {
+            background-color: #007BFF;
+            color: white;
+        }
+        .events {
+            margin-top: 15px;
+            list-style: none;
+            padding: 0;
+        }
+        .event {
+            padding: 8px;
+            border-bottom: 1px solid #D3D3D3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <main class="main-content">
+            <header>
+                <h1>Hi Osama, <br> Welcome to your courses!</h1>
+                <input type="text" placeholder="Search..." class="search-bar">
+            </header>
+            <section class="course-selection">
+                <div>
+                    <label>Choose the Semester</label>
+                    <select id="semester">
+                        <option>Select</option>
+                        <option>Semester 1</option>
+                        <option>Semester 2</option>
+                        <option>Semester 3</option>
+                        <option>Semester 4</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Choose the Course</label>
+                    <select id="course">
+                        <option>Select</option>
+                        <option>23MAT116</option>
+                        <option>23MAT117</option>
+                        <option>23CSE111</option>
+                        <option>23PHY115</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Choose</label>
+                    <select id="choose">
+                        <option>Select</option>
+                        <option>Resources</option>
+                        <option>Tests & Quizzes</option>
+                        <option>Assignments</option>
+                        <option>Announcements</option>
+                    </select>
+                </div>
+            </section>
+            <section class="content-box"></section>
+        </main>
+        <aside class="calendar">
+            <div class="calendar-header">
+                <button onclick="prevMonth()">◀️</button>
+                <span id="calendar-month"></span>
+                <button onclick="nextMonth()">▶️</button>
+            </div>
+            <div class="date-grid" id="date-grid"></div>
+            <ul class="events" id="event-list"></ul>
+            <div>
+                <input type="date" id="event-date"><br><br>
+                <input type="text" id="event-text" placeholder="Enter event"><br><br>
+                <button onclick="addEvent()">Add Event</button>
+            </div>
+        </aside>
+    </div>
+    <script>
+        let currentDate = new Date();
+        const events = {};
+
+        function renderCalendar() {
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            document.getElementById("calendar-month").innerText = `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+            const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
+            const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+            const dateGrid = document.getElementById("date-grid");
+            dateGrid.innerHTML = "";
+            for (let i = 0; i < firstDay; i++) {
+                dateGrid.innerHTML += `<div></div>`;
+            }
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                dateGrid.innerHTML += `<div class="${isToday(day) ? 'today' : ''}" onclick="showEvents('${dateStr}', this)">${day}</div>`;
+            }
+        }
+
+        function isToday(day) {
+            const today = new Date();
+            return currentDate.getFullYear() === today.getFullYear() && currentDate.getMonth() === today.getMonth() && day === today.getDate();
+        }
+
+        function showEvents(date, element) {
+            document.querySelectorAll('.date-grid div').forEach(div => div.classList.remove('selected'));
+            element.classList.add('selected');
+            const eventList = document.getElementById("event-list");
+            eventList.innerHTML = events[date] ? events[date].map((e, index) => 
+                `<li class='event ${e.completed ? "completed" : ""}'>${e.text} <button onclick='markCompleted("${date}", ${index})'>✔</button></li>`
+            ).join('') : "<li class='event'>No events scheduled.</li>";
+        }
+
+        function addEvent() {
+            const date = document.getElementById("event-date").value;
+            const text = document.getElementById("event-text").value;
+            if (!date || !text) return;
+            if (!events[date]) events[date] = [];
+            events[date].push({ text: text, completed: false });
+            showEvents(date, document.querySelector(`.date-grid div:nth-child(${parseInt(date.split('-')[2])})`));
+        }
+
+        function markCompleted(date, index) {
+            events[date][index].completed = !events[date][index].completed;
+            showEvents(date, document.querySelector(`.date-grid div:nth-child(${parseInt(date.split('-')[2])})`));
+        }
+
+        function prevMonth() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        }
+
+        function nextMonth() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        }
+
+        document.addEventListener("DOMContentLoaded", renderCalendar);
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

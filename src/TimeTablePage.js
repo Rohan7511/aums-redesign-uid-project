@@ -125,7 +125,7 @@ const TimeTablePage = () => {
 
     const handleTimetableDisplay = () => {
         if (semester && branch && section) {
-            const imagePath = `C:/Rohan/aums-electron/public/timetables/cse/sem2/a.png`;
+            const imagePath = `/timetables/${branch}/${semester}/${section}.jpg`;
             setTimetableImage(imagePath);
         }
     };
